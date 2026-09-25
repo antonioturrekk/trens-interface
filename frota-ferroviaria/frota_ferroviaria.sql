@@ -8,6 +8,17 @@ DROP TABLE IF EXISTS leitura_sensor;
 
 DROP TABLE IF EXISTS trens;
 
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE usuarios (
+    id_usuario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome_usuario VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    senha_hash VARCHAR(255) NOT NULL,
+    data_cadastro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY ux_usuarios_email (email)
+);
+
 CREATE TABLE trens (
     id_trem INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     prefixo_trem VARCHAR(20) NOT NULL,

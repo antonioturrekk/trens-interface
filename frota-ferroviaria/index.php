@@ -1,6 +1,7 @@
 <?php
-session_start();
-require 'conexao.php';
+require 'auth.php';
+
+$usuario = usuarioLogado();
 
 $mensagem = $_SESSION['mensagem'] ?? '';
 unset($_SESSION['mensagem']);
@@ -20,14 +21,20 @@ $resultado = $conexao->query('SELECT * FROM trens ORDER BY prefixo_trem');
 <body>
 
     <header>
-        <span class="marca">Frota Ferroviária</span>
-        <nav>
-            <a href="index.php" class="ativo">Trens</a>
-            <a href="painel.php">Painel</a>
-            <a href="leituras.php">Leituras</a>
-            <a href="simulador.php">Simulador</a>
-            <a href="consumir_api.php">API</a>
-        </nav>
+        <div class="cabecalho-esquerda">
+            <span class="marca">Frota Ferroviária</span>
+            <nav>
+                <a href="index.php" class="ativo">Trens</a>
+                <a href="painel.php">Painel</a>
+                <a href="leituras.php">Leituras</a>
+                <a href="simulador.php">Simulador</a>
+                <a href="consumir_api.php">API</a>
+            </nav>
+        </div>
+        <div class="usuario-area">
+            <span class="usuario-nome">Olá, <?= htmlspecialchars($usuario['nome']) ?></span>
+            <a href="logout.php" class="link-sair">Sair</a>
+        </div>
     </header>
 
     <main>

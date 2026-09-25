@@ -1,6 +1,7 @@
 <?php
-session_start();
-require 'conexao.php';
+require 'auth.php';
+
+$usuario = usuarioLogado();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tremId     = (int) $_POST['trem_id'];
@@ -42,6 +43,23 @@ $trens = $conexao->query('SELECT id_trem, prefixo_trem, modelo_trem FROM trens O
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <div class="cabecalho-esquerda">
+            <span class="marca">Frota Ferroviária</span>
+            <nav>
+                <a href="index.php">Trens</a>
+                <a href="painel.php">Painel</a>
+                <a href="leituras.php">Leituras</a>
+                <a href="simulador.php" class="ativo">Simulador</a>
+                <a href="consumir_api.php">API</a>
+            </nav>
+        </div>
+        <div class="usuario-area">
+            <span class="usuario-nome">Olá, <?= htmlspecialchars($usuario['nome']) ?></span>
+            <a href="logout.php" class="link-sair">Sair</a>
+        </div>
+    </header>
+
     <main class="container">
         <h1>Simulador de Leituras IoT</h1>
         
