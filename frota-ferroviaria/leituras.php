@@ -3,8 +3,8 @@ session_start();
 require 'conexao.php';
 
 $sql = "SELECT l.*, t.prefixo_trem, t.modelo_trem 
-        FROM leituras_sensores l 
-        INNER JOIN trens t ON l.id_trem = t.id_trem 
+        FROM leitura_sensor l 
+        INNER JOIN trens t ON l.fk_id_trem = t.id_trem 
         ORDER BY l.data_hora DESC LIMIT 50";
 $resultado = $conexao->query($sql);
 ?>
@@ -60,7 +60,7 @@ $resultado = $conexao->query($sql);
                             <td>#<?= (int) $leitura['id_leitura'] ?></td>
                             <td><strong><?= htmlspecialchars($leitura['prefixo_trem']) ?></strong> (<?= htmlspecialchars($leitura['modelo_trem']) ?>)</td>
                             <td><?= number_format((float) $leitura['velocidade_kmh'], 1, ',', '.') ?> km/h</td>
-                            <td><?= number_format((float) $leitura['temperatura_celsius'], 1, ',', '.') ?> °C</td>
+                            <td><?= number_format((float) $leitura['temperatura_motor_c'], 1, ',', '.') ?> °C</td>
                             <td><?= date('d/m/Y H:i:s', strtotime($leitura['data_hora'])) ?></td>
                         </tr>
                     <?php endwhile; ?>
