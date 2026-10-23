@@ -1,0 +1,904 @@
+/* =========================================================
+   FasTrain — Design tokens
+   Estilização baseada em painel administrativo de referência:
+   topo azul, sidebar cinza clara com destaques vermelhos,
+   tabelas densas.
+   ========================================================= */
+:root{
+  --blue: #c92a2a;
+  --blue-dark: #a52121;
+  --blue-tint: #fbebeb;
+
+  --red: #c92a2a;
+  --red-dark: #a52121;
+  --red-tint: #fbebeb;
+
+  --ink: #2b2f38;
+  --muted: #6b7280;
+  --border: #e3e7ee;
+
+  --sidebar-bg: #f5f7fa;
+  --panel-bg: #ffffff;
+  --page-bg: #eef1f6;
+
+  --ok: #2e8b3d;
+  --warn: #e0a12b;
+  --off: #9a9a9a;
+
+  --radius-lg: 10px;
+  --radius-md: 7px;
+  --radius-pill: 999px;
+
+  --shadow: 0 10px 30px rgba(20,30,50,.12);
+  --shadow-sm: 0 2px 8px rgba(20,30,50,.06);
+
+  --font: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  --sidebar-w: 230px;
+  --topbar-h: 56px;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--font);
+  background:var(--page-bg);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  font-size:14px;
+}
+button, input, select{font-family:inherit;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;border:none;background:none;}
+
+.hidden{display:none !important;}
+
+/* =========================================================
+   App shell
+   ========================================================= */
+#app{
+  min-height:100vh;
+  width:100%;
+  position:relative;
+  overflow-x:hidden;
+}
+
+.screen{
+  min-height:100vh;
+  width:100%;
+  display:none;
+  background:var(--page-bg);
+}
+.screen.active{display:block;}
+
+/* =========================================================
+   Telas de autenticação (splash / login / cadastro)
+   Tema único, claro, com o azul e o vermelho da marca.
+   ========================================================= */
+.auth-screen{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 24px;
+  position:relative;
+  text-align:center;
+  background:var(--panel-bg);
+}
+
+.auth-back{
+  position:absolute;
+  top:24px; left:24px;
+  background:var(--panel-bg);
+  color:var(--ink);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-pill);
+  padding:8px 18px;
+  font-weight:700;
+  font-size:.78rem;
+  letter-spacing:.05em;
+}
+
+.a11y-buttons{
+  position:absolute;
+  top:24px; right:24px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.a11y-buttons button{
+  width:40px;height:40px;
+  border-radius:10px;
+  background:var(--blue);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.logo-wrap{ margin-bottom:8px; }
+.logo-wrap img{ width:170px; margin:0 auto; }
+.tagline{
+  font-style:italic;
+  font-weight:600;
+  color:var(--muted);
+  margin-top:6px;
+  margin-bottom:36px;
+}
+
+.auth-card{
+  width:100%;
+  max-width:360px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px 24px;
+  box-shadow:var(--shadow-sm);
+}
+
+.btn{
+  width:100%;
+  padding:13px 20px;
+  border-radius:var(--radius-md);
+  font-weight:700;
+  font-size:.92rem;
+  border:1.5px solid transparent;
+  transition:filter .15s ease, background .15s ease;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.btn:hover{ filter:brightness(1.06); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+.btn-primary{ background:var(--blue); color:#fff; border-color:var(--blue); }
+.btn-primary:hover{ background:var(--blue-dark); border-color:var(--blue-dark); }
+.btn-outline{ background:var(--panel-bg); color:var(--blue); border-color:var(--blue); }
+.btn-danger{ background:var(--red); color:#fff; border-color:var(--red); }
+.btn-danger-outline{ background:transparent; border:1.5px solid var(--red); color:var(--red); }
+.btn-ghost-dark{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.btn-ghost-light{ background:var(--panel-bg); color:var(--ink); border-color:var(--border); }
+
+.field{ position:relative; width:100%; text-align:left; }
+.field label{
+  display:block; font-size:.76rem; font-weight:700; color:var(--muted);
+  margin-bottom:6px; text-transform:uppercase; letter-spacing:.03em;
+}
+.field input, .field select{
+  width:100%;
+  padding:12px 44px 12px 14px;
+  border-radius:var(--radius-md);
+  border:1.5px solid var(--border);
+  background:var(--panel-bg);
+  color:var(--ink);
+  font-size:.9rem;
+  outline:none;
+}
+.field input:focus, .field select:focus{ border-color:var(--blue); }
+.field input::placeholder{ color:#a2a8b4; }
+.field .icon{
+  position:absolute;
+  right:14px; top:38px;
+  color:var(--muted);
+  pointer-events:none;
+}
+.field.no-label .icon{ top:50%; transform:translateY(-50%); }
+.field .icon.clickable{ pointer-events:auto; cursor:pointer; }
+
+.link-line{
+  font-size:.82rem;
+  text-decoration:underline;
+  font-weight:600;
+  color:var(--blue);
+}
+
+.divider{ width:100%; height:1px; background:var(--border); margin:4px 0; }
+
+.social-row{ display:flex; justify-content:center; gap:0; }
+.social-pill{
+  background:var(--sidebar-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-pill);
+  display:flex;
+  padding:8px 18px;
+  gap:14px;
+}
+.social-pill button{
+  width:32px;height:32px;
+  border-radius:50%;
+  background:#fff;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+}
+
+.hint-warning{
+  font-size:.78rem;
+  font-weight:700;
+  color:var(--red);
+  display:flex;
+  align-items:center;
+  gap:6px;
+  justify-content:center;
+}
+
+.form-error{
+  background:var(--red-tint);
+  color:var(--red);
+  border:1.5px solid var(--red);
+  border-radius:var(--radius-md);
+  padding:10px 14px;
+  font-size:.82rem;
+  font-weight:700;
+  text-align:left;
+}
+.form-success{
+  background:#eaf6ec;
+  color:var(--ok);
+  border:1.5px solid var(--ok);
+  border-radius:var(--radius-md);
+  padding:10px 14px;
+  font-size:.82rem;
+  font-weight:700;
+  text-align:left;
+}
+
+/* Splash */
+.splash-dots{ display:flex; gap:8px; margin-top:28px; }
+.splash-dots span{ width:9px;height:9px;border-radius:50%; background:#dde1e8; }
+.splash-dots span.active{ background:var(--blue); }
+
+/* =========================================================
+   Shell interno: topo azul + sidebar cinza + conteúdo
+   ========================================================= */
+.app-shell{
+  min-height:100vh;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+/* --- Topbar global (linha de cima, largura total) --- */
+.topbar-global{
+  height:var(--topbar-h);
+  min-height:var(--topbar-h);
+  background:var(--panel-bg);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:0 18px;
+  position:sticky;
+  top:0;
+  z-index:70;
+}
+.topbar-global .tg-logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:800;
+  color:var(--blue);
+  font-size:1.05rem;
+  flex-shrink:0;
+}
+.topbar-global .tg-logo img{ width:26px; }
+.topbar-global .tg-hint{
+  color:var(--muted);
+  font-size:.8rem;
+  flex:1;
+  text-align:center;
+  display:none;
+}
+.hamburger{
+  width:36px;height:32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  flex-shrink:0;
+}
+.hamburger span{ display:block; height:2.5px; border-radius:3px; background:var(--blue); }
+
+.tg-actions{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-left:auto;
+}
+.icon-btn{
+  width:34px;height:34px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--sidebar-bg);
+  color:var(--blue);
+  flex-shrink:0;
+  position:relative;
+}
+.icon-btn:hover{ background:var(--blue-tint); }
+.icon-btn .dot{
+  position:absolute; top:2px; right:2px;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--red);
+  border:2px solid var(--panel-bg);
+}
+.tg-welcome{
+  font-size:.82rem;
+  font-weight:700;
+  color:var(--ink);
+  white-space:nowrap;
+  padding-left:6px;
+}
+.tg-welcome span{ color:var(--blue); }
+
+/* --- Corpo: sidebar + conteúdo --- */
+.shell-body{
+  flex:1;
+  display:flex;
+  width:100%;
+  align-items:stretch;
+  min-height:0;
+}
+
+.sidebar-overlay{
+  position:fixed; inset:0;
+  background:rgba(20,30,50,.35);
+  z-index:55;
+  display:none;
+}
+.sidebar-overlay.show{ display:block; }
+
+.sidebar{
+  background:var(--sidebar-bg);
+  border-right:1px solid var(--border);
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  padding:18px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  position:fixed;
+  top:0; left:0; bottom:0;
+  transform:translateX(-100%);
+  transition:transform .25s ease;
+  z-index:60;
+  overflow-y:auto;
+}
+.sidebar.open{ transform:translateX(0); }
+
+.sidebar-label{
+  color:var(--red);
+  font-weight:800;
+  font-size:.72rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:8px 10px 10px;
+  border-bottom:2px solid var(--red-tint);
+  margin-bottom:6px;
+}
+
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  color:var(--ink);
+  padding:10px 10px;
+  border-radius:var(--radius-md);
+  font-weight:600;
+  font-size:.86rem;
+  text-align:left;
+}
+.nav-item svg{ flex-shrink:0; color:var(--red); }
+.nav-item-label{ display:inline-block; flex:1 1 auto; min-width:0; white-space:nowrap; overflow:visible; text-overflow:clip; }
+.nav-item:hover{ background:var(--red-tint); }
+.nav-item.active{ background:var(--blue-tint); color:var(--blue); }
+.nav-item.active svg{ color:var(--blue); }
+
+.sidebar-footer{
+  margin-top:auto;
+  background:var(--red);
+  color:#fff;
+  border-radius:var(--radius-md);
+  padding:12px 14px;
+  font-size:.75rem;
+  font-weight:700;
+}
+.sidebar-footer .sf-name{ font-size:.88rem; margin-bottom:2px; }
+.sidebar-footer .sf-time{ opacity:.85; font-weight:600; }
+
+.main-area{
+  flex:1;
+  min-width:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+/* --- Breadcrumb --- */
+.breadcrumb{
+  background:var(--blue-tint);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--blue-dark);
+}
+.breadcrumb svg{ flex-shrink:0; }
+.breadcrumb .bc-sep{ opacity:.5; font-weight:400; }
+.breadcrumb .bc-current{ color:var(--muted); font-weight:600; }
+
+.page-content{
+  padding:20px;
+  max-width:1200px;
+  width:100%;
+  margin:0 auto;
+  flex:1;
+}
+
+.page-title{
+  font-weight:800;
+  font-size:1.1rem;
+  margin:2px 0 16px;
+  color:var(--ink);
+}
+
+/* =========================================================
+   Painel branco genérico + barra de ações
+   ========================================================= */
+.panel{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  padding:18px;
+  margin-bottom:18px;
+}
+.panel h2{
+  font-size:.95rem;
+  margin:0 0 14px;
+  color:var(--ink);
+}
+
+.filter-row{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+  font-size:.85rem;
+  font-weight:700;
+}
+.filter-row label{ display:flex; align-items:center; gap:6px; font-weight:600; cursor:pointer; }
+.filter-row input[type="radio"], .filter-row input[type="checkbox"]{ accent-color:var(--blue); }
+
+.action-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.action-row .label-acoes{
+  font-size:.78rem; font-weight:800; color:var(--muted); text-transform:uppercase;
+  margin-right:4px;
+}
+.btn-chip{
+  background:var(--panel-bg);
+  border:1.5px solid var(--border);
+  color:var(--ink);
+  border-radius:var(--radius-md);
+  padding:8px 14px;
+  font-size:.8rem;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.btn-chip:hover{ border-color:var(--blue); color:var(--blue); }
+.btn-chip.primary{ background:var(--blue); border-color:var(--blue); color:#fff; }
+.btn-chip.primary:hover{ background:var(--blue-dark); }
+.btn-chip.danger{ background:var(--panel-bg); border-color:var(--red); color:var(--red); }
+.btn-chip.danger:hover{ background:var(--red); color:#fff; }
+
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:9px 14px;
+  max-width:320px;
+  background:var(--panel-bg);
+  color:var(--muted);
+}
+.search-box input{ border:none;background:transparent;outline:none; color:var(--ink); width:100%; font-size:.85rem; }
+
+/* =========================================================
+   Tabelas
+   ========================================================= */
+.table-wrap{ overflow-x:auto; }
+table.data-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.83rem;
+}
+table.data-table thead th{
+  background:#f7f8fa;
+  color:var(--muted);
+  text-transform:uppercase;
+  font-size:.7rem;
+  letter-spacing:.04em;
+  text-align:left;
+  padding:10px 12px;
+  border-bottom:2px solid var(--border);
+  white-space:nowrap;
+}
+table.data-table tbody td{
+  padding:11px 12px;
+  border-bottom:1px solid var(--border);
+  color:var(--ink);
+  vertical-align:middle;
+}
+table.data-table tbody tr:hover{ background:var(--blue-tint); }
+table.data-table tbody tr:nth-child(even){ background:#fbfbfd; }
+table.data-table tbody tr:nth-child(even):hover{ background:var(--blue-tint); }
+.col-acoes{ text-align:right; white-space:nowrap; }
+.table-icon-btn{
+  width:30px;height:30px;
+  border-radius:7px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--sidebar-bg);
+  color:var(--blue);
+  margin-left:4px;
+}
+.table-icon-btn:hover{ background:var(--blue-tint); }
+.table-icon-btn.danger{ color:var(--red); }
+.table-icon-btn.danger:hover{ background:var(--red-tint); }
+.acima{ color:var(--red); font-weight:800; }
+
+.status-pill{
+  padding:3px 11px;
+  border-radius:var(--radius-pill);
+  font-weight:800;
+  font-size:.7rem;
+  color:#fff;
+  display:inline-block;
+}
+.status-ativo{ background:var(--ok); }
+.status-manutencao{ background:var(--warn); }
+.status-inativo{ background:var(--off); }
+
+.empty-note, .loading-note{
+  text-align:center;
+  color:var(--muted);
+  font-weight:600;
+  padding:36px 10px;
+}
+.error-note{
+  text-align:center;
+  color:var(--red);
+  font-weight:700;
+  padding:36px 10px;
+}
+
+/* =========================================================
+   Dashboard (Início)
+   ========================================================= */
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;
+  margin-bottom:18px;
+}
+.stat-card{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-left:4px solid var(--blue);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-sm);
+  padding:16px;
+}
+.stat-card.accent-red{ border-left-color:var(--red); }
+.stat-card.accent-warn{ border-left-color:var(--warn); }
+.stat-card.accent-ok{ border-left-color:var(--ok); }
+.stat-card .num{ font-size:1.6rem; font-weight:800; color:var(--ink); }
+.stat-card .label{ font-size:.78rem; color:var(--muted); font-weight:700; margin-top:2px; }
+
+.alert-panel .alert-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:.85rem;
+  padding:9px 0;
+  border-bottom:1px solid var(--border);
+}
+.alert-panel .alert-row:last-child{ border-bottom:none; }
+.alert-panel .alert-row svg{ flex-shrink:0; color:var(--warn); }
+
+/* =========================================================
+   Sensores / notificações — cards (mantidos p/ leitura rápida)
+   ========================================================= */
+.sensor-row{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:12px 14px;
+  margin-bottom:10px;
+}
+.sensor-row.alerta{ border-color:var(--warn); background:#fffaf0; }
+.sensor-icon{
+  width:46px;height:46px;
+  border-radius:10px;
+  background:var(--blue-tint);
+  color:var(--blue);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.sensor-row.alerta .sensor-icon{ background:#fdf0d8; color:var(--warn); }
+.sensor-info{ flex:1; min-width:140px; }
+.sensor-info .sid{ font-weight:800; font-size:.82rem; display:flex; align-items:center; gap:8px; }
+.sensor-info .sname{ font-weight:700; font-size:.86rem; margin-top:2px; }
+.sensor-info .sloc{ font-size:.75rem; color:var(--muted); margin-top:2px; }
+.sensor-value{ text-align:right; }
+.sensor-value .val{ font-weight:800; font-size:1.05rem; }
+.sensor-value .when{ font-size:.72rem; color:var(--muted); }
+
+.notif-card{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-left:5px solid var(--warn);
+  border-radius:var(--radius-md);
+  display:flex;
+  gap:14px;
+  padding:16px;
+  margin-bottom:12px;
+}
+.notif-icon{ width:42px;height:42px; flex-shrink:0; color:var(--warn); }
+.notif-body strong{ font-size:.95rem; display:flex; align-items:center; gap:8px; }
+.notif-body p{ margin:6px 0; font-weight:600; font-size:.85rem; color:var(--muted); }
+.notif-msg{ font-weight:700; font-size:.85rem; color:var(--ink); }
+
+/* =========================================================
+   Perfil
+   ========================================================= */
+.profile-card{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  padding:24px;
+  max-width:480px;
+  margin:0 auto 20px;
+}
+.profile-top{ display:flex; align-items:center; gap:16px; margin-bottom:18px; }
+.avatar{
+  width:64px;height:64px;
+  border-radius:50%;
+  background:var(--blue-tint);
+  color:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.profile-name{ font-weight:800; font-size:1.05rem; }
+.profile-email{ font-size:.82rem; color:var(--muted); margin-top:2px; }
+.profile-tag{
+  display:inline-block; margin-top:6px;
+  background:var(--red-tint); color:var(--red);
+  font-size:.7rem; font-weight:800;
+  padding:3px 10px; border-radius:var(--radius-pill);
+}
+.profile-fields{ display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+.profile-fields .pf{
+  background:var(--sidebar-bg);
+  border-radius:var(--radius-md);
+  padding:11px 14px;
+  font-weight:600;
+  font-size:.85rem;
+  display:flex;
+  justify-content:space-between;
+  color:var(--ink);
+}
+.profile-fields .pf span{ color:var(--muted); font-weight:700; }
+.profile-actions{ display:flex; flex-direction:column; gap:10px; }
+
+/* =========================================================
+   Mapa de rota
+   ========================================================= */
+.map-card{
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+}
+.map-card-head{
+  background:var(--blue);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  font-weight:800;
+  font-size:.88rem;
+}
+.map-svg-wrap{
+  padding:16px;
+  background:repeating-linear-gradient(0deg, #f7f8fa, #f7f8fa 22px, #f0f1f5 22px, #f0f1f5 23px);
+}
+.route-chip-row{
+  display:flex; align-items:center; gap:10px; padding:14px 16px; flex-wrap:wrap;
+  border-top:1px solid var(--border);
+}
+.route-chip{
+  background:var(--sidebar-bg);
+  color:var(--ink);
+  font-weight:800;
+  padding:8px 16px;
+  border-radius:var(--radius-pill);
+  font-size:.8rem;
+  border:1px solid var(--border);
+}
+.split-layout{ display:grid; grid-template-columns:1fr; gap:18px; }
+.side-panel{
+  background:var(--panel-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  text-align:center;
+}
+.side-panel .train-tag{ font-weight:800; font-size:1.1rem; color:var(--blue); }
+
+.toggle-pill{
+  display:inline-flex;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  border:1.5px solid var(--border);
+  margin-bottom:16px;
+}
+.toggle-pill button{ padding:9px 22px; font-weight:700; font-size:.82rem; background:var(--panel-bg); color:var(--muted); }
+.toggle-pill button.active{ background:var(--blue); color:#fff; }
+
+/* =========================================================
+   Modal (formulário de trem / leitura)
+   ========================================================= */
+.modal-overlay{
+  position:fixed; inset:0;
+  background:rgba(20,30,50,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:150;
+  padding:20px;
+}
+.modal-overlay.show{ display:flex; }
+.modal-box{
+  background:#fff;
+  color:var(--ink);
+  border-radius:var(--radius-lg);
+  padding:24px;
+  width:100%;
+  max-width:420px;
+  max-height:90vh;
+  overflow-y:auto;
+  box-shadow:var(--shadow);
+}
+.modal-box-head{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:16px;
+}
+.modal-box-head h3{ margin:0; font-size:1rem; }
+.modal-box-head button{ color:var(--muted); }
+.modal-box .field{ margin-bottom:12px; }
+.modal-linha{ display:flex; gap:12px; }
+.modal-linha .field{ flex:1; }
+.modal-actions{ display:flex; gap:10px; margin-top:6px; }
+.modal-actions .btn{ flex:1; }
+
+.toast{
+  position:fixed;
+  left:50%; bottom:26px;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#fff;
+  padding:11px 22px;
+  border-radius:var(--radius-pill);
+  font-weight:700;
+  font-size:.82rem;
+  box-shadow:var(--shadow);
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease;
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(-6px); }
+.toast.toast-error{ background:var(--red); }
+.toast.toast-ok{ background:var(--ok); }
+
+/* =========================================================
+   Responsivo — Desktop
+   ========================================================= */
+@media (min-width:900px){
+  .sidebar{
+    position:sticky;
+    top:var(--topbar-h);
+    height:calc(100vh - var(--topbar-h));
+    transform:none;
+  }
+  .sidebar-overlay{ display:none !important; }
+  .hamburger{ display:none; }
+  .shell-body{ align-items:flex-start; }
+  .page-content{ padding:22px 30px; }
+  .topbar-global .tg-hint{ display:block; }
+  .stat-grid{ grid-template-columns:repeat(4,1fr); }
+  .split-layout{ grid-template-columns:2fr 1fr; align-items:start; }
+  .side-panel{ position:sticky; top:80px; }
+}
+
+@media (max-width:700px){
+  .tg-welcome{ display:none; }
+  .breadcrumb{ font-size:.78rem; }
+}
+
+/* Focus visibility for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline:3px solid #ffd166;
+  outline-offset:2px;
+}
+
+/* Notificações de sensores e recomendações de manutenção */
+.notif-card.notif-alert { border-left: 4px solid var(--red, #c92a2a); }
+.notif-card.notif-maintenance { border-left: 4px solid #d97706; }
+.notif-card .notif-body p { margin: 5px 0 8px; color: var(--muted); font-size: .82rem; }
+
+/* Cadastro e gerenciamento de sensores */
+.modal-form { display:flex; flex-direction:column; gap:12px; }
+.modal-form label { display:flex; flex-direction:column; gap:6px; color:var(--text); font-size:.88rem; font-weight:700; }
+.modal-form input, .modal-form select { width:100%; min-height:42px; padding:10px 12px; border:1px solid var(--border); border-radius:8px; background:var(--panel-bg); color:var(--text); font:inherit; }
+.modal-form input:focus, .modal-form select:focus { outline:2px solid #c92a2a; outline-offset:1px; }
+.form-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:8px; }
+.form-error { color:var(--red); font-size:.85rem; margin:0; }
+
+
+/* Mapa ferroviário detalhado e trem animado */
+.rail-map{padding:14px;background:#f7f9fc;border-bottom:1px solid var(--border)}
+.rail-map-topline{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:2px 4px 12px;color:#596579;font-size:.78rem;font-weight:700}
+.rail-map-topline span:first-child{color:#253047}.map-live-dot{display:inline-block;width:8px;height:8px;margin-right:7px;border-radius:50%;background:#2f9e44;box-shadow:0 0 0 4px #2f9e4420;animation:mapPulse 1.6s infinite}
+.rail-svg{display:block;max-height:620px;overflow:visible}.rail-map-legend{display:flex;gap:16px;flex-wrap:wrap;padding:13px 5px 2px;color:#596579;font-size:.76rem;font-weight:700}.rail-map-legend span{display:flex;align-items:center;gap:7px}.legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%}.legend-dot.green{background:#2f9e44}.legend-dot.blue{background:#2479b7}.legend-dot.gold{background:#e0a12b}.legend-dot.red{background:#c92a2a}@keyframes mapPulse{0%,100%{opacity:1;box-shadow:0 0 0 4px #2f9e4420}50%{opacity:.65;box-shadow:0 0 0 7px #2f9e4410}}
+@media(max-width:600px){.rail-map{padding:8px}.rail-map-topline{font-size:.7rem}.rail-svg{min-height:260px}.rail-map-legend{gap:9px;font-size:.68rem}}
+
+/* Mapa metro + progresso dos trens */
+.rail-map-canvas{width:100%;overflow:hidden;border-radius:12px}.rail-svg{width:100%;height:auto;max-height:none;display:block;overflow:hidden}.rail-map-legend{align-items:center}.rail-map-legend .legend-dot.red{background:#c92a2a}
+.train-trip-card{cursor:pointer;display:block!important;padding:18px 20px!important;margin-bottom:14px}.train-trip-head{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.train-trip-id{display:flex;flex:1;min-width:150px;flex-direction:column;gap:5px}.train-trip-id strong{color:#c92a2a}.train-trip-id span,.train-trip-reading span{color:var(--muted);font-size:.82rem}.train-trip-reading{text-align:right;min-width:130px;display:flex;flex-direction:column;gap:4px}.trip-progress-block{margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}.trip-progress-title{display:flex;justify-content:space-between;gap:12px;font-size:.82rem;margin-bottom:12px}.trip-progress-title span{color:var(--muted)}.trip-progress-title strong{color:#c92a2a}.trip-progress-track{height:9px;background:#e9edf3;border-radius:20px;overflow:visible;position:relative}.trip-progress-fill{height:100%;background:linear-gradient(90deg,#c92a2a,#e45b5b);border-radius:20px;position:relative;transition:width .5s ease}.trip-progress-train{position:absolute;right:-13px;top:-18px;font-size:21px;filter:drop-shadow(0 2px 2px #0002)}.trip-progress-fill.is-moving .trip-progress-train{animation:trainBob 1.8s ease-in-out infinite}.trip-station-labels{display:flex;justify-content:space-between;gap:12px;margin-top:14px}.trip-station-labels span{display:flex;flex-direction:column;gap:3px}.trip-station-labels b{font-size:.84rem}.trip-station-labels small{font-size:.72rem;color:var(--muted)}.trip-next-station{text-align:right}.trip-station-dots{display:flex;justify-content:space-between;margin-top:12px;position:relative}.trip-station-dot{width:9px;height:9px;border:2px solid #cbd3df;background:#fff;border-radius:50%;z-index:1}.trip-station-dot.passed{background:#c92a2a;border-color:#c92a2a}.trip-station-dot.current{width:13px;height:13px;margin-top:-2px;border:3px solid #fff;background:#c92a2a;box-shadow:0 0 0 2px #c92a2a}
+@keyframes trainBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(max-width:600px){.train-trip-card{padding:14px!important}.train-trip-reading{text-align:left;min-width:100%}.rail-svg{min-width:680px}.rail-map-canvas{overflow-x:auto}.trip-progress-title{font-size:.75rem}}
+
+/* Correções mapa geral e acesso ao mapa individual */
+.trip-card-actions{display:flex;justify-content:flex-end;margin:8px 0 4px}.map-train-list{margin-top:14px;padding:16px}.map-train-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.map-train-buttons .btn{font-size:.8rem}.rail-map-canvas{min-height:300px}.rail-svg{width:100%;height:auto;display:block}.metro-train-marker{pointer-events:none}
+
+
+/* Ajustes finais do mapa de metrô */
+.rail-map-canvas { overflow: hidden; }
+.rail-svg { display:block; width:100%; height:auto; min-height:360px; }
+.metro-station-label { paint-order:stroke; stroke:#f8fafc; stroke-width:5px; stroke-linejoin:round; fill:#253047; }
+.map-train-list { margin-top:18px; }
+.map-train-buttons { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+.map-train-buttons .btn { white-space:normal; }
+.train-trip-card .trip-card-actions { display:flex; justify-content:flex-end; margin-top:10px; }
+.individual-train-marker { pointer-events:none; }
+
+/* Paginação em abas para manter a lista de trens compacta */
+.trips-pagination{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0 24px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:14px;color:var(--muted);font-size:.85rem}.trips-pagination>div{display:flex;gap:6px;flex-wrap:wrap}.trips-pagination button{min-width:34px;height:34px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--text);font-weight:700;cursor:pointer}.trips-pagination button.active{background:#c92a2a;border-color:#c92a2a;color:#fff}.legend-dot.green{background:#2f9e44}

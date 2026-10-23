@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FasTrain — Painel de Monitoramento de Frota</title>
+<link rel="icon" href="assets/logo-light.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ============================================================
+       1. SPLASH
+       ============================================================ -->
+  <section id="screen-splash" class="screen active">
+    <div class="auth-screen">
+      <div class="logo-wrap"><img src="assets/logo-light.png" alt="FasTrain"/></div>
+      <p class="tagline">Shaping the future together.</p>
+      <div class="splash-dots">
+        <span class="active"></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. LANDING (Login / Sign up)
+       ============================================================ -->
+  <section id="screen-landing" class="screen">
+    <div class="auth-screen">
+      <div class="logo-wrap"><img src="assets/logo-light.png" alt="FasTrain"/></div>
+      <p class="tagline">Painel de monitoramento de frota ferroviária.</p>
+      <div class="auth-card">
+        <button class="btn btn-outline" onclick="go('login')">Login</button>
+        <button class="btn btn-primary" onclick="go('signup')">Sign Up</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. LOGIN
+       ============================================================ -->
+  <section id="screen-login" class="screen">
+    <div class="auth-screen">
+      <button class="auth-back" onclick="go('landing')">‹ VOLTAR</button>
+      <div class="logo-wrap"><img src="assets/logo-light.png" alt="FasTrain"/></div>
+      <form id="form-login" class="auth-card" style="margin-top:20px">
+        <div id="login-error"></div>
+        <div class="field no-label">
+          <input type="email" id="login-email" placeholder="E-mail" required />
+          <span class="icon"><span data-icon="user"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="password" id="login-pass" placeholder="Senha" required />
+          <span class="icon clickable" onclick="togglePassword('login-pass', this)"><span data-icon="eye"></span></span>
+        </div>
+        <button type="submit" class="btn btn-primary" id="login-submit">Entrar</button>
+        <a href="#" class="link-line" onclick="go('forgot');return false;">Esqueceu a senha?</a>
+        <div class="divider"></div>
+        <div class="social-row">
+          <div class="social-pill">
+            <button type="button" aria-label="Entrar com Facebook"><span data-icon="fb"></span></button>
+            <button type="button" aria-label="Entrar com Google"><span data-icon="google"></span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. FORGOT PASSWORD
+       ============================================================ -->
+  <section id="screen-forgot" class="screen">
+    <div class="auth-screen">
+      <button class="auth-back" onclick="go('login')">‹ VOLTAR</button>
+      <div class="logo-wrap"><img src="assets/logo-light.png" alt="FasTrain"/></div>
+      <form class="auth-card" style="margin-top:20px" onsubmit="event.preventDefault(); go('login');">
+        <div class="field no-label">
+          <input type="email" placeholder="E-mail" required />
+          <span class="icon"><span data-icon="mail"></span></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar código</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. SIGN UP (pessoal)
+       ============================================================ -->
+  <section id="screen-signup" class="screen">
+    <div class="auth-screen">
+      <button class="auth-back" onclick="go('landing')">‹ VOLTAR</button>
+      <div class="logo-wrap"><img src="assets/logo-light.png" alt="FasTrain"/></div>
+      <form id="form-signup" class="auth-card" style="margin-top:20px">
+        <div id="signup-error"></div>
+        <div class="field no-label">
+          <input type="text" id="signup-nome" placeholder="Nome" required />
+          <span class="icon"><span data-icon="user"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="email" id="signup-email" placeholder="E-mail" required />
+          <span class="icon"><span data-icon="mail"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="password" id="signup-pass" placeholder="Senha (mín. 6 caracteres)" required />
+          <span class="icon clickable" onclick="togglePassword('signup-pass', this)"><span data-icon="eye"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="password" id="signup-pass2" placeholder="Confirmar senha" required />
+          <span class="icon clickable" onclick="togglePassword('signup-pass2', this)"><span data-icon="eye"></span></span>
+        </div>
+        <button type="submit" class="btn btn-primary" id="signup-submit">Criar conta</button>
+        <a href="#" class="link-line" onclick="go('signup-company');return false;">cadastrar como empresa</a>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. SIGN UP (empresa)
+       ============================================================ -->
+  <section id="screen-signup-company" class="screen">
+    <div class="auth-screen">
+      <button class="auth-back" onclick="go('signup')">‹ VOLTAR</button>
+      <div class="logo-wrap"><img src="assets/logo-light.png" alt="FasTrain"/></div>
+      <form id="form-signup-company" class="auth-card" style="margin-top:20px">
+        <div id="signupc-error"></div>
+        <div class="field no-label">
+          <input type="text" id="signupc-nome" placeholder="Nome da empresa" required />
+          <span class="icon"><span data-icon="user"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="email" id="signupc-email" placeholder="E-mail" required />
+          <span class="icon"><span data-icon="mail"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="text" id="signupc-cnpj" placeholder="CNPJ" required />
+          <span class="icon"><span data-icon="doc"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="password" id="signupc-pass" placeholder="Senha (mín. 6 caracteres)" required />
+          <span class="icon clickable" onclick="togglePassword('signupc-pass', this)"><span data-icon="eye"></span></span>
+        </div>
+        <div class="field no-label">
+          <input type="password" id="signupc-pass2" placeholder="Confirmar senha" required />
+          <span class="icon clickable" onclick="togglePassword('signupc-pass2', this)"><span data-icon="eye"></span></span>
+        </div>
+        <button type="submit" class="btn btn-primary" id="signupc-submit">Criar conta</button>
+        <p class="hint-warning"><span data-icon="alert"></span> ATENÇÃO! Somente para empresas.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. HOME / DASHBOARD
+       ============================================================ -->
+  <section id="screen-home" class="screen">
+    <div id="shell-home" class="app-shell">
+      <header class="topbar-global js-topbar"></header>
+      <div class="shell-body">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <nav class="sidebar js-sidebar"></nav>
+        <div class="main-area">
+          <div class="breadcrumb js-breadcrumb"></div>
+          <main class="page-content">
+            <h1 class="page-title">Início</h1>
+            <div id="home-body"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. TRIPS (List / Maps)
+       ============================================================ -->
+  <section id="screen-trips" class="screen">
+    <div id="shell-trips" class="app-shell">
+      <header class="topbar-global js-topbar"></header>
+      <div class="shell-body">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <nav class="sidebar js-sidebar"></nav>
+        <div class="main-area">
+          <div class="breadcrumb js-breadcrumb"></div>
+          <main class="page-content">
+            <h1 class="page-title">Trens em trânsito</h1>
+            <div id="trips-body"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8b. TRAIN DETAIL
+       ============================================================ -->
+  <section id="screen-train-detail" class="screen">
+    <div id="shell-train-detail" class="app-shell">
+      <header class="topbar-global js-topbar"></header>
+      <div class="shell-body">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <nav class="sidebar js-sidebar"></nav>
+        <div class="main-area">
+          <div class="breadcrumb js-breadcrumb"></div>
+          <main class="page-content">
+            <div id="train-detail-body"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. PROFILE
+       ============================================================ -->
+  <section id="screen-profile" class="screen">
+    <div id="shell-profile" class="app-shell">
+      <header class="topbar-global js-topbar"></header>
+      <div class="shell-body">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <nav class="sidebar js-sidebar"></nav>
+        <div class="main-area">
+          <div class="breadcrumb js-breadcrumb"></div>
+          <main class="page-content">
+            <h1 class="page-title">Perfil</h1>
+            <div id="profile-body"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10. TRAINS (gestão de frota)
+       ============================================================ -->
+  <section id="screen-trains" class="screen">
+    <div id="shell-trains" class="app-shell">
+      <header class="topbar-global js-topbar"></header>
+      <div class="shell-body">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <nav class="sidebar js-sidebar"></nav>
+        <div class="main-area">
+          <div class="breadcrumb js-breadcrumb"></div>
+          <main class="page-content">
+            <h1 class="page-title">Gestão de frota</h1>
+            <div id="trains-body"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11. SENSORS
+       ============================================================ -->
+  <section id="screen-sensors" class="screen">
+    <div id="shell-sensors" class="app-shell">
+      <header class="topbar-global js-topbar"></header>
+      <div class="shell-body">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <nav class="sidebar js-sidebar"></nav>
+        <div class="main-area">
+          <div class="breadcrumb js-breadcrumb"></div>
+          <main class="page-content">
+            <h1 class="page-title">Sensores</h1>
+            <div id="sensors-body"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. NOTIFICATIONS
+       ============================================================ -->
+  <section id="screen-notifications" class="screen">
+    <div id="shell-notifications" class="app-shell">
+      <header class="topbar-global js-topbar"></header>
+      <div class="shell-body">
+        <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <nav class="sidebar js-sidebar"></nav>
+        <div class="main-area">
+          <div class="breadcrumb js-breadcrumb"></div>
+          <main class="page-content">
+            <h1 class="page-title">Notificações</h1>
+            <div id="notifications-body"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MODAL genérico (formulário de trem / nova leitura)
+       ============================================================ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box" id="modal-box"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

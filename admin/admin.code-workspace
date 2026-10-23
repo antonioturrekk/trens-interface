@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../api"
+		},
+		{
+			"path": "../assets"
+		},
+		{
+			"path": "../css"
+		},
+		{
+			"path": "../database"
+		},
+		{
+			"path": "../js"
+		}
+	],
+	"settings": {}
+}
